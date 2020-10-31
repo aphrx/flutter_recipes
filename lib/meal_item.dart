@@ -30,7 +30,34 @@ class MealItem{
   String ingredients19;
   String ingredients20;
 
-  MealItem({ this.id, this.name, this.category, this.area, this.instructions, this.image});
+  MealItem({ 
+    this.id, 
+    this.name, 
+    this.category, 
+    this.area, 
+    this.instructions, 
+    this.image,
+    this.ingredients1,
+    this.ingredients2,
+    this.ingredients3,
+    this.ingredients4,
+    this.ingredients5,
+    this.ingredients6,
+    this.ingredients7,
+    this.ingredients8,
+    this.ingredients9,
+    this.ingredients10,
+    this.ingredients11,
+    this.ingredients12,
+    this.ingredients13,
+    this.ingredients14,
+    this.ingredients15,
+    this.ingredients16,
+    this.ingredients17,
+    this.ingredients18,
+    this.ingredients19, 
+    this.ingredients20
+  });
 
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
@@ -38,7 +65,29 @@ class MealItem{
       'category': category,
       'area': area, 
       'instructions': instructions,
-      'image': image
+      'image': image,
+      'ingredients1': ingredients1,
+      'ingredients2': ingredients2,
+      'ingredients3': ingredients3,
+      'ingredients4': ingredients4,
+      'ingredients5': ingredients5,
+      'ingredients6': ingredients6,
+      'ingredients7': ingredients7,
+      'ingredients8': ingredients8,
+      'ingredients9': ingredients9,
+      'ingredients10': ingredients10,
+      'ingredients11': ingredients11,
+      'ingredients12': ingredients12,
+      'ingredients13': ingredients13,
+      'ingredients14': ingredients14,
+      'ingredients15': ingredients15,
+      'ingredients16': ingredients16,
+      'ingredients17': ingredients17,
+      'ingredients18': ingredients18,
+      'ingredients19': ingredients19,
+      'ingredients20': ingredients20,
+
+
     };
 
     if (id != null) {

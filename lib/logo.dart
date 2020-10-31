@@ -9,8 +9,8 @@ class Logo extends StatelessWidget{
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
-          Text("aphrx", style: GoogleFonts.montserrat(color: Colors.black, fontSize: 22)),
-          Text("eats", style: GoogleFonts.montserrat(color: Color.fromRGBO(58,175,169,1), fontSize: 22, fontWeight: FontWeight.w600)),
+          Text("aphrx", style: GoogleFonts.montserrat(color: Color.fromRGBO(105, 105, 108, 1), fontSize: 22,  fontWeight: FontWeight.w500)),
+          Text("eats", style: GoogleFonts.montserrat(color: Color.fromRGBO(58,175,169,1), fontSize: 22, fontWeight: FontWeight.w700)),
         ]
       )
     );

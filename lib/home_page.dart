@@ -4,15 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_meal/logo.dart';
 import 'package:flutter_meal/meal_item.dart';
+import 'package:flutter_meal/meal_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
-class Homepage extends StatefulWidget{
+class HomePage extends StatefulWidget{
   @override
-  State<StatefulWidget> createState() => _HomepageState();
+  State<StatefulWidget> createState() => _HomePageState();
 }
 
-class _HomepageState extends State<Homepage>{
+class _HomePageState extends State<HomePage>{
 
   String _search = "";
   List<MealItem> _meals = [];
@@ -21,7 +22,7 @@ class _HomepageState extends State<Homepage>{
 
   Widget searchField(){
     return Container(
-      margin: EdgeInsets.all(15),
+      margin: EdgeInsets.fromLTRB(15, 0, 15, 15),
       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
       decoration: BoxDecoration(
         color: Color.fromRGBO(58,195,169,1),
@@ -54,43 +55,50 @@ class _HomepageState extends State<Homepage>{
           setState(() {
             _search = text;
           });
-          print(text);
+          //print(text);
         }
       )
     );
   }
   Widget formatResults(MealItem meal){
-    return Container(
-      margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
-      padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-      width: double.infinity,
-      height: 70,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.black12,
-            blurRadius: 10,
-            offset:  Offset(0.0, 10)
-          )
-        ]
+    return FlatButton(
+      child: Container(
+        margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
+        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+        width: double.infinity,
+        height: 70,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10,
+              offset:  Offset(0.0, 10)
+            )
+          ]
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children:[
+            Text(
+              meal.name,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.montserrat(
+                color: Color.fromRGBO(105, 105, 108, 1),
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(meal.category, style: GoogleFonts.montserrat(
+              color: Color.fromRGBO(105, 105, 108, 1),
+              fontWeight: FontWeight.normal
+            ))
+          ]
+        ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
-          Text(meal.name, style: GoogleFonts.montserrat(
-            color: Color.fromRGBO(105, 105, 108, 1),
-            fontSize: 16,
-            fontWeight: FontWeight.bold
-          )),
-          SizedBox(height: 10),
-          Text(meal.category, style: GoogleFonts.montserrat(
-            color: Color.fromRGBO(105, 105, 108, 1),
-            fontWeight: FontWeight.normal
-          ))
-        ]
-      )
+      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => MealPage(meal: meal))),
     );
   }
 
@@ -108,7 +116,7 @@ class _HomepageState extends State<Homepage>{
 
     if(responseBody.isNotEmpty) {        
       var data = jsonDecode(responseBody);
-        print(data['meals']);
+        //print(data['meals']);
         if(data['meals'] == null){
           return list;
         }
@@ -118,6 +126,29 @@ class _HomepageState extends State<Homepage>{
             name: data['meals'][i]['strMeal'],
             category: data['meals'][i]['strCategory'],
             area: data['meals'][i]['strArea'],
+            image: data['meals'][i]['strMealThumb'],
+            instructions: data['meals'][i]['strInstructions'],
+            ingredients1: data['meals'][i]['strIngredient1'],
+            ingredients2: data['meals'][i]['strIngredient2'],
+            ingredients3: data['meals'][i]['strIngredient3'],
+            ingredients4: data['meals'][i]['strIngredient4'],
+            ingredients5: data['meals'][i]['strIngredient5'],
+            ingredients6: data['meals'][i]['strIngredient6'],
+            ingredients7: data['meals'][i]['strIngredient7'],
+            ingredients8: data['meals'][i]['strIngredient8'],
+            ingredients9: data['meals'][i]['strIngredient9'],
+            ingredients10: data['meals'][i]['strIngredient10'],
+            ingredients11: data['meals'][i]['strIngredient11'],
+            ingredients12: data['meals'][i]['strIngredient12'],
+            ingredients13: data['meals'][i]['strIngredient13'],
+            ingredients14: data['meals'][i]['strIngredient14'],
+            ingredients15: data['meals'][i]['strIngredient15'],
+            ingredients16: data['meals'][i]['strIngredient16'],
+            ingredients17: data['meals'][i]['strIngredient17'],
+            ingredients18: data['meals'][i]['strIngredient18'],
+            ingredients19: data['meals'][i]['strIngredient19'],
+            ingredients20: data['meals'][i]['strIngredient20'],
+
           );
           list.add(s);
         }
@@ -133,33 +164,38 @@ class _HomepageState extends State<Homepage>{
         if(snapshot.hasError ) print(snapshot.error);
         if(_search == null || _search.length == 0){
           return Container(
-            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+            margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children:[
-                Text("Suggestions", style: GoogleFonts.montserrat(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold
-                )),
+                Container(
+                  padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                  child: Text("Suggestions", style: GoogleFonts.montserrat(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold
+                  )),
+                )
               ]
             )
           );
         }
         else{
           return Container(
-            margin: EdgeInsets.fromLTRB(0, 60, 0, 0),
-            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+            margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
             child: ListView(
               children:[
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children:[
-                    Text("Results", style: GoogleFonts.montserrat(
+                    Container(
+                      padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                      child: Text("Results", style: GoogleFonts.montserrat(
                         color: Colors.white,
                         fontSize: 22,
                         fontWeight: FontWeight.bold
                       )),
+                    ),
                     Column(children: snapshot.data)
                   ]
                 )
@@ -176,7 +212,7 @@ class _HomepageState extends State<Homepage>{
       Stack(
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 35, 0, 0),
+            margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
             decoration: BoxDecoration(
               gradient: LinearGradient(colors:[Color.fromRGBO(58,175,169,1), Color.fromRGBO(58,175,169,1)]),
               borderRadius: BorderRadius.only(
